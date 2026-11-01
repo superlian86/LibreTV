@@ -9,6 +9,15 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1 max-w-2xl w-full mx-auto px-4 py-10 space-y-8">
         <section>
+          <h2 className="text-base font-semibold mb-2">影视资料来源</h2>
+          <a className="text-accent" href="https://www.themoviedb.org/">TMDB</a>
+          {/* Official TMDB attribution asset, kept at its original aspect ratio. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="w-20 h-auto my-2" alt="TMDB" src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" />
+          <p className="text-sm text-muted">This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+          <p className="text-sm text-muted">全球片库提供影视资讯，不提供播放资源。热度为当前 TMDB 人气，年份为电影发行或剧集首次开播年份。</p>
+        </section>
+        <section>
           <h1 className="text-xl font-bold text-content mb-3">关于 LibreTV</h1>
           <p className="text-sm text-muted leading-relaxed">
             LibreTV 是一个免费的在线视频搜索与观看平台。输入片名即可在多个点播源中聚合搜索，

@@ -106,6 +106,8 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  discover: (params: URLSearchParams, signal?: AbortSignal) =>
+    request<import('./discover-types').DiscoverResponse>(`/api/discover?${params}`, { signal }),
   status: () => request<AuthStatusResponse>('/api/status'),
 
   login: (password: string) =>

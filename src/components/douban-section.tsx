@@ -7,6 +7,7 @@ import { useAppStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import type { DoubanItem } from '@/lib/types';
 import { DoubanCard } from './video-card';
+import { DiscoverView } from './discover-view';
 
 const MOVIE_TAGS = ['热门', '最新', '经典', '豆瓣高分', '冷门佳片', '华语', '欧美', '韩国', '日本', '动画'];
 const TV_TAGS = ['热门', '美剧', '英剧', '韩剧', '日剧', '国产剧', '港剧', '日本动画', '综艺', '纪录片'];
@@ -16,11 +17,18 @@ const WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '�
 export function RecommendSection({ onPick }: { onPick: (title: string) => void }) {
   const doubanEnabled = useAppStore((s) => s.doubanEnabled);
   const recommendSource = useAppStore((s) => s.recommendSource);
+  const [view, setView] = useState('discover');
 
   if (!doubanEnabled) return null;
-  if (recommendSource === 'bangumi') return <BangumiView onPick={onPick} />;
-  if (recommendSource === 'hot-list') return <HotListView onPick={onPick} />;
-  return <DoubanView onPick={onPick} />;
+  return <div>
+    <div className="flex gap-2 mb-5">
+      <TypeButton active={view === 'discover'} onClick={() => setView('discover')}>全球片库</TypeButton>
+      <TypeButton active={view === 'original'} onClick={() => setView('original')}>原有推荐 / 周榜</TypeButton>
+    </div>
+    {view === 'discover' ? <DiscoverView onPick={onPick} /> : recommendSource === 'bangumi'
+      ? <BangumiView onPick={onPick} /> : recommendSource === 'hot-list'
+        ? <HotListView onPick={onPick} /> : <DoubanView onPick={onPick} />}
+  </div>;
 }
 
 /**
